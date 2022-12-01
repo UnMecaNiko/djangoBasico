@@ -7,9 +7,19 @@ Instalar Django: \
 `pip install django` \
 Empezar un proyecto en Django: \
 `django-admin startproject premiosplatziapp` \
+\
+Django crea distintos archivos:
+- `manage.py` : Muestra los diferentes comando disponibles para hacer que el proyecto funcione.
+
+- `_init_.py` : Indica que la carpeta es un paquete que contiene los archivos de la aplicación web.
+
+- `asgi.py` / `wsgi.py` : Sirven para hacer el despliegue de la aplicación.
+
+- `settings.py` : Contiene toda la información de la configuración del proyecto como el lenguaje, la zona horaria, las bases de datos, etc.
+
+- `urls.py` : Donde se trbajan las direcciones con las que nos podemos mover a través del proyecto como la ruta admin o user.
 
 # Helpful tips
-
 
 ## Crear un entorno virtual
 
@@ -17,6 +27,8 @@ Empezar un proyecto en Django: \
 python3 -m venv venv
 source ./venv/bin/activate
 ```
+
+
 
 ## Crear carpetas anidadas
 
