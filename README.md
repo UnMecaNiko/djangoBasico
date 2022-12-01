@@ -42,6 +42,8 @@ Tendremos una salida de este estilo:
 
 ![image](https://user-images.githubusercontent.com/86577488/205124270-7f0923da-9ed2-4e95-aacc-3d404804c03d.png)
 
+en el archivo de configuraciones, la variables `DEBUG` debe siempre estar en `True` cuando se trabaja en local
+
 # Helpful tips
 
 ## Crear un entorno virtual
