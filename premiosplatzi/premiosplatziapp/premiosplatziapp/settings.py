@@ -73,10 +73,10 @@ WSGI_APPLICATION = 'premiosplatziapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# Contiene la información del proyecto con las bases de datos
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3', # cambiar base de datos (relacionales)
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 

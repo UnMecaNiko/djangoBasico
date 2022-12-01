@@ -95,3 +95,5 @@ mkdir -p CarpetaGeneral/{carpeta1,carpeta2/{subdirectorio1,subdirectorio2},carpe
 
 - [Writing your first Django app, part 1](https://docs.djangoproject.com/en/3.2/intro/tutorial01/)
 
+- [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
