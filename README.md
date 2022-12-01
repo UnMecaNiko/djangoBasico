@@ -44,6 +44,30 @@ Tendremos una salida de este estilo:
 
 en el archivo de configuraciones, la variables `DEBUG` debe siempre estar en `True` cuando se trabaja en local
 
+Un proyecto en Django es un conjunto de aplicaciones, una aplicación se refiere a un paquete donde se guardan los modelos, vistas y demás funcionalidades que estén estrechamente relacionadas.
+
+## Premios Platzi App
+
+Crear una aplicación "polls"
+```zsh
+python3 manage.py startapp polls
+```
+
+dentro de la carpeta principal "premiosplatziapp" hay dos carpetas "premiosplatziapp" y "polls"
+El proyecto principal es contenedor de distintas aplicaciones, por lo que cada aplicación tiene su archivo `urls.py`.
+El archivo que está contenido en la carpeta del proyecto principal tiene que incluir los archivos de las demás aplicaciones
+Así:
+*En el archivo `urls.py` de la carpeta del proyecto*
+```py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("polls/" ,include("polls.urls"))
+]
+```
+
 # Helpful tips
 
 ## Crear un entorno virtual
@@ -65,4 +89,9 @@ mkdir -p CarpetaGeneral/{carpeta1,carpeta2/{subdirectorio1,subdirectorio2},carpe
 
 - [.gitignore](https://www.toptal.com/developers/gitignore)
 
+- [Basic writing and formatting syntax](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
 - [Django documentation](https://docs.djangoproject.com/en/3.2/)
+
+- [Writing your first Django app, part 1](https://docs.djangoproject.com/en/3.2/intro/tutorial01/)
+
