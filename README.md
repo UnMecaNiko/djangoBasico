@@ -9,7 +9,7 @@ En este primer curso de la saga de Django analizarás los conceptos iniciales pa
 Lo que verás a continuación son mis notas del curso 🚀
 Si ves algún error o punto a mejorar no dudes en hacer tu aporte 💚
 
-# Starting
+## Starting
 
 Instalar Django: \
 `pip install django` \
@@ -26,6 +26,20 @@ Django crea distintos archivos:
 - `settings.py` : Contiene toda la información de la configuración del proyecto como el lenguaje, la zona horaria, las bases de datos, etc.
 
 - `urls.py` : Donde se trbajan las direcciones con las que nos podemos mover a través del proyecto como la ruta admin o user.
+
+## El servidor de desarrollo
+
+Nunca se toca el código que está en producción, siempre se desarrolla en local y se hace deploy.
+Django facilita el proceso brindando infraestructura para ver el proyecto sin necesidad de enviarlo al servidor.
+Podemos correr el servidor:
+```zsh
+python3 manage.py runserver
+```
+La salida del anterior comando nos va a decir si hay errores o advertencias.
+Se imprime la fecha, la versión de django, el archivo de configuraciones que se está usando, la dirección donde está corriendo el server (será localhost), por último una instrucción para poder cerrar el server (ctrl+c).
+
+Tendremos una salida de este estilo:
+
 
 # Helpful tips
 
