@@ -212,6 +212,29 @@ Para traer un objeto en específicos de las clases ORM podemos usar `Question.ob
 Para obtener múltiples respuestas podemos usar `Question.objects.filter(question_text__startswith="¿Cual")` este método devuelve un QuerySet
 Otro ejemplo: `Question.objects.filter(pub_date__year=timezone.now().year)`
 
+## Administrador de datos
+
+para comenzar a usar el administrador se debe crear un usuario y contraseña:
+`python3 manage.py createsuperuser`
+Se debe tener mucho cuidado con la seguridad de estos datos, ya que si son expuestos pueden comprometer la aplicacion completa.
+
+Ahora, se deben hacer disponibles los modelos creados al administrador:
+*En el archivo *admin.py* de la carpeta polls:*
+```py
+from .models import Question
+
+admin.site.register(Question)
+```
+
+Usando la dirección http://127.0.0.1:8000/admin/ Se puede entrar al panel de administración.
+
+## Views
+
+### MTV | Model Template View
+
+Siempre se crea un modelo que se muestra en un template que a su vez aparece en una vista (en este proyecto se tienen los modelos Question y Choice)
+
+
 # Helpful tips
 
 ## Crear un entorno virtual
@@ -229,7 +252,7 @@ mkdir -p CarpetaGeneral/{carpeta1,carpeta2/{subdirectorio1,subdirectorio2},carpe
 
 # Helpful Links
 
-- [.gitignore](https://www.toptal.com/developers/gitignore)
+- [.gitignore](https://w    ww.toptal.com/developers/gitignore)
 
 - [Basic writing and formatting syntax](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
@@ -238,4 +261,6 @@ mkdir -p CarpetaGeneral/{carpeta1,carpeta2/{subdirectorio1,subdirectorio2},carpe
 - [Writing your first Django app, part 1](https://docs.djangoproject.com/en/3.2/intro/tutorial01/)
 
 - [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+- [Making queries | Django documentation](https://docs.djangoproject.com/en/3.2/topics/db/queries/#field-lookups-intro)
 
