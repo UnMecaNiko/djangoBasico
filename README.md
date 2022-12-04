@@ -216,7 +216,7 @@ Otro ejemplo: `Question.objects.filter(pub_date__year=timezone.now().year)`
 
 para comenzar a usar el administrador se debe crear un usuario y contraseña:
 `python3 manage.py createsuperuser`
-Se debe tener mucho cuidado con la seguridad de estos datos, ya que si son expuestos pueden comprometer la aplicacion completa.
+Se debe tener mucho cuidado con la seguridad de estos datos, ya que si son expuestos pueden comprometer la aplicación completa.
 
 Ahora, se deben hacer disponibles los modelos creados al administrador:
 *En el archivo *admin.py* de la carpeta polls:*
@@ -233,6 +233,44 @@ Usando la dirección http://127.0.0.1:8000/admin/ Se puede entrar al panel de ad
 ### MTV | Model Template View
 
 Siempre se crea un modelo que se muestra en un template que a su vez aparece en una vista (en este proyecto se tienen los modelos Question y Choice)
+
+### Crear vistas
+
+en el archivo `views.py` de mi aplicacion yo puedo crear distintas vistas como se ven a continuación:
+```py
+def index(request):
+    return HttpResponse("Estás en la página principal de premios Platzi app")
+
+
+def detail(request, question_id):
+    return HttpResponse(f"Estás viendo la pregunta número {question_id}")
+
+
+def results(request, question_id):
+    return HttpResponse(f"Estás viendolos resultados de la pregunta número {question_id}")
+
+
+def vote(request, question_id):
+    return HttpResponse(f"Estás votando por la pregunta número {question_id}")
+```
+Luego estas vistas son ligadas a una url, esto se programa en el archivo `urls.py`:
+```py
+urlpatterns = [
+    # ex: /polls/
+    path("", views.index, name="index"),
+    # ex: /polls/5/
+    path("<int:question_id>/", views.detail, name="index"),
+    path("<int:question_id>/results/", views.results, name="index"),
+    path("<int:question_id>/vote/", views.vote, name="index"),
+]
+```
+Como las urls están configuradas desde una aplicación, siempre van a tener el nombre de la aplicación antes de cualquier url.
+Nótese como "<>" se usa para enviar parámetros a las vistas, esto permite tener múltiples urls con respuestas únicas.
+
+
+
+
+
 
 
 # Helpful tips
