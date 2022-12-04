@@ -140,6 +140,8 @@ Se crea un archivo *0001_initial.py* en el que django describe toda la creación
 
 Django toma la programación que hicimos en el archivo *models.py* y lo convierte a tablas en la base de datos que estamos usando (en este caso sqlite3)
 
+Cuando se agregan métodos a las clases no es necesario hacer migraciones.
+
 ## Interactive shell in django
 
 Es de saber genera que con el comando `python3` podemos acceder a la consola de python, el problema es que esta vive en un entorno aislado, por lo que no podemos acceder a los archivos de nuestro proyecto. Para esta situación Django nos da una solución, interactive shell:
@@ -162,6 +164,48 @@ q = Question(question_text="¿Cual es el mejor curso de platzi?", pub_date=timez
 q.save()
 ```
 Si volvemos a ejecutar `Question.objects.all()` podemos ver que ya no devuelve un objeto vacío
+
+## El método __str__
+
+En el archivo *models..py*:
+```py
+from django.db import models
+
+# Create your models here.
+# name´s models always singular
+# cada vez que se haga un cambio se debe hacer migration
+
+# python3 manage.py makemigrations polls
+# python3 manage.py migrate
+from django.db import models
+from django.utils import timezone
+
+class Question(models.Model):
+
+    # id - Django lo hace automáticamente
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField("date published")
+
+    def __str__(self):
+        return self.question_text
+    
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
+class Choice(models.Model):
+
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.choice_text
+```
+
+Se sobreescriben los métodos *__str__* para mostrar la lista de preguntas y opciones de una forma más visual en consola cuando ejecutamos `Question.objects.all()`, además se agregán un método que nos permite saber si la pregunta se ha publicado recientemente.
+Cuenado se agregan métodos no es necesario hacer migraciones, si hay un cambio de nombre o se agrega una nueva clase la migración es obligatoria.
+
+
 
 # Helpful tips
 
