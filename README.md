@@ -267,7 +267,15 @@ urlpatterns = [
 Como las urls están configuradas desde una aplicación, siempre van a tener el nombre de la aplicación antes de cualquier url.
 Nótese como "<>" se usa para enviar parámetros a las vistas, esto permite tener múltiples urls con respuestas únicas.
 
+### Crear Templates
 
+Generalmente el desarrollador backend se encargaría de crear las vistas y el desarrollador front de los templates, usando distintos frameworks distintos a Django. Para este curso vamos a crear ambos de una manera sencilla.
+
+Ubicados en la carpeta de la aplicación ejecutamos en consola:
+`mkdir -p templates/polls`
+Para crear una carpeta donde vamos a crear las templates.
+Ahora creamos un archivo html para comenzar a crear la página.
+`touch templates/polls/index.html`
 
 
 
@@ -288,9 +296,21 @@ source ./venv/bin/activate
 mkdir -p CarpetaGeneral/{carpeta1,carpeta2/{subdirectorio1,subdirectorio2},carpeta3,carpeta4}
 ```
 
+## Tener sugerencias de autocompletado html en archivos ligados a Django
+(Para vsCode) 
+
+Instala la extensión Django en tu editor.
+Presiona F1 y escribe "settings.json", selecciona la opción open user settings. Al archivo Json debes agregar estas líneas.
+```py
+"emmet.includeLanguages": {
+        "django-html": "html"
+    }
+```
+Puedes reiniciar la extensión si no te sale aún el autocompletado.
+
 # Helpful Links
 
-- [.gitignore](https://w    ww.toptal.com/developers/gitignore)
+- [.gitignore](https://www.toptal.com/developers/gitignore)
 
 - [Basic writing and formatting syntax](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
