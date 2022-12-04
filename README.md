@@ -209,6 +209,8 @@ Cuenado se agregan métodos no es necesario hacer migraciones, si hay un cambio 
 
 Para traer un objeto en específicos de las clases ORM podemos usar `Question.object.get(pk=1)` (el comando get sólo devuelve un valor)
 
+Para obtener múltiples respuestas podemos usar `Question.objects.filter(question_text__startswith="¿Cual")` este método devuelve un QuerySet
+Otro ejemplo: `Question.objects.filter(pub_date__year=timezone.now().year)`
 
 # Helpful tips
 
