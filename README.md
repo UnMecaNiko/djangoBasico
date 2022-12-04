@@ -149,7 +149,7 @@ Para correr una shell en Django correcmos lo siguiente en la consola
 ```zsh
 python3 manage.py shell
 ```
-dentro de InterctiveConsole
+dentro de InteractiveConsole
 ```py
 from polls.models import Choice,Question
 ```
@@ -205,6 +205,9 @@ class Choice(models.Model):
 Se sobreescriben los métodos *__str__* para mostrar la lista de preguntas y opciones de una forma más visual en consola cuando ejecutamos `Question.objects.all()`, además se agregán un método que nos permite saber si la pregunta se ha publicado recientemente.
 Cuenado se agregan métodos no es necesario hacer migraciones, si hay un cambio de nombre o se agrega una nueva clase la migración es obligatoria.
 
+### Filtrando los objetos creados desde la consola interactiva
+
+Para traer un objeto en específicos de las clases ORM podemos usar `Question.object.get(pk=1)` (el comando get sólo devuelve un valor)
 
 
 # Helpful tips
