@@ -68,6 +68,26 @@ urlpatterns = [
 ]
 ```
 
+## Models
+
+### ORM - Object Relational Mapping
+
+Es la forma de replicar la estructura de una base de datos relacional con programación orientada a objetos.
+
+>> Utilizando un ORM podemos operar sobre la base de datos aprovechando las características propias de la orientación a objetos, como herencia y polimorfismo.
+
+Las bases de datos se conforman por tablas y cada tablas obtiene los datos relacionados a cada entidad, es posible convertir estas bases de datos en un archivo python que contiene la representación en programación orientada a objetos.
+
+Las tablas corresponden a modelos (los cuales se expresan como clases), las columans van a corresponder a atributos de esas clases y los tipos de datos de cada columna correponderán a clases ligadas a los atributos de los objetos.
+
+#### Ventajas 
+
+- Facilidad y velocidad de uso
+- Abstracción de la base de datos
+- Seguridad de la capa de acceso a datos contra ataques.
+- Reutilización. Nos permite utilizar los métodos de un objeto de datos desde distintas zonas de la aplicación, incluso desde aplicaciones distintas.
+- Mantenimiento del código.
+
 # Helpful tips
 
 ## Crear un entorno virtual
@@ -76,8 +96,6 @@ urlpatterns = [
 python3 -m venv venv
 source ./venv/bin/activate
 ```
-
-
 
 ## Crear carpetas anidadas
 
