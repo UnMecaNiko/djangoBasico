@@ -68,6 +68,21 @@ urlpatterns = [
 ]
 ```
 
+La nueva aplicación creada *polls* debe ser agregada al archivo de configuración del proyecto:
+
+**En el archivo *settings.py* de la carpeta del proyecto:**
+```py
+INSTALLED_APPS = [
+    "polls.apps.PollsConfig",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+
 ## Models
 
 ### ORM - Object Relational Mapping
@@ -87,6 +102,66 @@ Las tablas corresponden a modelos (los cuales se expresan como clases), las colu
 - Seguridad de la capa de acceso a datos contra ataques.
 - Reutilización. Nos permite utilizar los métodos de un objeto de datos desde distintas zonas de la aplicación, incluso desde aplicaciones distintas.
 - Mantenimiento del código.
+
+Siguiendo el siguiente diagrama:
+
+![tablas_django_facundo-db4611e4-7fa6-4e3a-aeeb-e9d06ae65a23.png](https://static.platzi.com/media/user_upload/tablas_django_facundo-db4611e4-7fa6-4e3a-aeeb-e9d06ae65a23-97a81043-4060-402c-9668-38ef6b1bdc90.jpg)
+
+Se van a crear las estructuras de datos para nuestra aplicación.
+
+**En el archivo *models.py* de la carpeta polls:**
+
+```py
+# Create your models here.
+
+# name´s models always singular
+# cada vez que se haga un cambio se debe hacer migration
+class Question(models.Model):
+
+    # id - Django lo hace automáticamente
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField("date published")
+
+class Choice(models.Model):
+
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+```
+
+Luego, en la consola (tenemos que tener el entorno virtual activo y estar ubicados en la carpeta padre)
+```zsh
+python3 manage.py makemigrations polls
+python3 manage.py migrate
+```
+El concepto *migration* corresponde a cambiar la información o software desde un sistema a otro. En este caso transformamos los escrito en python a una base de datos relacional.
+
+Se crea un archivo *0001_initial.py* en el que django describe toda la creación de las tablas en la base de datos, aquí es donde se hace uso del concepto ORM.
+
+Django toma la programación que hicimos en el archivo *models.py* y lo convierte a tablas en la base de datos que estamos usando (en este caso sqlite3)
+
+## Interactive shell in django
+
+Es de saber genera que con el comando `python3` podemos acceder a la consola de python, el problema es que esta vive en un entorno aislado, por lo que no podemos acceder a los archivos de nuestro proyecto. Para esta situación Django nos da una solución, interactive shell:
+Para correr una shell en Django correcmos lo siguiente en la consola
+```zsh
+python3 manage.py shell
+```
+dentro de InterctiveConsole
+```py
+from polls.models import Choice,Question
+```
+podemos acceder a las distintas características de las tablas, como `Question.objects.all()`
+
+Ahora, podemos probar agregando datos a mano, primero tenemos que traer un módulo adicional: `from django.utils import timezone` 
+
+Podemos agregar una pregunta:
+```py
+q = Question(question_text="¿Cual es el mejor curso de platzi?", pub_date=timezone.now())
+# y para guardar en la base de datos:
+q.save()
+```
+Si volvemos a ejecutar `Question.objects.all()` podemos ver que ya no devuelve un objeto vacío
 
 # Helpful tips
 
