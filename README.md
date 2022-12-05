@@ -335,6 +335,38 @@ Para que la url funcione de forma adecuada debemos asignar el nombre de nuestra 
 
 De esta forma se puede con libertad cambiar las urls sin afectar los templates o archivos asociados.
 
+## Formularios
+
+`{% csrf_token %}`: Esta etiqueta agrega un token de seguridad para evitar ataques de hacking a formularios
+
+Para dejar todo listo para crear el voto, se replantea la programación en el archivo detail.html de la siguiente manera:
+```html
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ question.question_text }}</h1></legend>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        {% for choice in question.choice_set.all %}
+            <input 
+                type="radio"
+                name="choice"
+                id="choice{{ forloop.counter }}"
+                value="{{choice.id}}"
+            >
+            <label for="choice{{ forloop.counter }}">
+                {{ choice.choice_text }}
+            </label>
+            <br>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Votar">
+</form>
+```
+El formulario de linkea a la vista vote cuando se presiona el botón votar
+
+
 
 # Helpful tips
 
