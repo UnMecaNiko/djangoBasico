@@ -393,6 +393,37 @@ Siempre que se trabaje con formularios es una buena práctica redirigir al usuar
 
 la función en python `reverse("", args=() )` tiene su equivalente en django: `{% url '' %}`
 
+## Creando la vista results
+
+Hasta ahora tenemos la interfaz de voto y el conteo de votos programado, ahora vamos a programar la vista resultados para ver la cantidad de votos por opción cuando votamos, para esto hacemos cambios en los archivos `views.py` y `results.html`, este último lo vamos a crear, recordemos que todo lo trabajamos dentro de la carpeta de la aplicación.
+**En el archivo `views.py`**
+```py
+def results(request, question_id):
+    # siempre se llega después de ejecutar vote
+    question= get_object_or_404(Question, pk=question_id)
+    return render(request, "polls/results.html", {
+        "question": question
+    })
+```
+Recordemos que al llamar los templates debemos enviar los argumentos si son necesarios, en este caso "question"
+
+**En el archivo `results.html`**
+```html
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>
+            {{ choice.choice_text }} -- {{ choice.votes }}
+            vote{{ choice.votes|pluralize  }}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'polls:detail' question.id %}">
+    ¿Te gustaría votar de nuevo?
+</a>
+```
+El indentado de la programación cambia un poco, considero que así se ve más organizado
+
 # Helpful tips
 
 ## Crear un entorno virtual
