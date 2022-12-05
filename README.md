@@ -322,6 +322,18 @@ def detail(request, question_id):
 ```
 La funcion `get_object_or_404` es usada para devolver un error 404 si no se encuentra el objeto.
 
+>> Hard-code: Término del mundo de la informática que hace referencia a una práctica en el desarrollo de software que consiste en incrustar datos directamente en el código fuente del programa.
+
+Para evitar el hard-code en nuestro programa vamos a usar la etiqueta `url` en el archivo `index.html`
+
+```html
+            <li><a href="{% url 'polls:detail' question.id %}">
+                {{ question.question_text }}
+            </a></li>
+```
+Para que la url funcione de forma adecuada debemos asignar el nombre de nuestra aplicación en la variable `app_name = "polls"`
+
+De esta forma se puede con libertad cambiar las urls sin afectar los templates o archivos asociados.
 
 
 # Helpful tips
