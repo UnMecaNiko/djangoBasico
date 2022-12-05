@@ -366,7 +366,32 @@ Para dejar todo listo para crear el voto, se replantea la programación en el ar
 ```
 El formulario de linkea a la vista vote cuando se presiona el botón votar
 
+## Vista vote
 
+Por el momento la interfaz está lista pero internamente no se están contando los votos. Este es el siguiente paso.
+
+Se programa entonces la lógica de programación en el archivo `views.py`:
+```py
+def vote(request, question_id):
+    question= get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST["choice"])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, "polls/detail.html", {
+            "question": question,
+            "error_message": "No elegiste una respuesta"
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse("polls:results", 
+            args=(question.id, )))
+```
+En este casos se usa un try para saber si se ha seleccionado una opción o si la opción seleccionada es válida, la forma de controlar este error es volver a redirigir la página llamando a `detail.html` pero esta vez con un mensaje de error.
+
+Siempre que se trabaje con formularios es una buena práctica redirigir al usuario con la función `HttpResponseRedirect` en lugar del clásico `HttpResponse`, así nos aseguramos que el usuario no envíe la información dos veces.
+
+la función en python `reverse("", args=() )` tiene su equivalente en django: `{% url '' %}`
 
 # Helpful tips
 
