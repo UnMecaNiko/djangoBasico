@@ -33,7 +33,7 @@ Nunca se toca el código que está en producción, siempre se desarrolla en loca
 Django facilita el proceso brindando infraestructura para ver el proyecto sin necesidad de enviarlo al servidor.
 Podemos correr el servidor:
 ```zsh
-python3 manage.py runserver
+    python3 manage.py runserver
 ```
 La salida del anterior comando nos va a decir si hay errores o advertencias.
 Se imprime la fecha, la versión de django, el archivo de configuraciones que se está usando, la dirección donde está corriendo el server (será localhost), por último una instrucción para poder cerrar el server (ctrl+c).
@@ -277,6 +277,31 @@ Para crear una carpeta donde vamos a crear las templates.
 Ahora creamos un archivo html para comenzar a crear la página.
 `touch templates/polls/index.html`
 
+Ahora, la forma en la que se ha programado el archivo:
+```html
+{% if  latest_question_list%}
+    <ul>
+        {% for question in latest_question_list %}
+            <li><a href="/polls/{{ question.id }}">
+                {{ question.question_text }}
+            </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available</p>
+{% endif %}
+```
+Permite recorrer todas las preguntas y linkear cada una de ellas a una url distinta, esta plantilla se agrega al archivo de vistas:
+```py
+from .models import Question
+
+def index(request):
+    latest_question_list = Question.objects.all()
+    return render(request, "polls/index.html", {
+        "latest_question_list": latest_question_list
+    })
+```
+Cada vez que una url llame a la vista index, esta llamará al template `index.html` y le enviará el argumento `latest_question_list`
 
 
 
