@@ -424,6 +424,49 @@ Recordemos que al llamar los templates debemos enviar los argumentos si son nece
 ```
 El indentado de la programación cambia un poco, considero que así se ve más organizado
 
+## Generic Views
+
+>DRY: Don´t Repeat Yourself
+
+Hasta ahora hemos programado Class Based Views, lo que podemos observar en el archivo `views.py` es que por ejemplo las funciones results y detail son exactamente iguales, por lo que estaríamos incumpliendo el principio DRY.
+Las generic views nos permiten evitar caer en este error, estas funcionan por clases y existen multiples que se adaptan a distintos casos, actualización, login, formularios, etc. (info completa en los links de referencia)
+
+Example: vamos a cambiar las vistas que tenemos definidas por funciones a generic views:
+**En el archivo `views.py`**
+```py
+# generic views
+from django.views import generic
+
+class IndexView(generic.ListView):
+    template_name = "polls/index.html"
+    context_object_name = "latest_question_list"
+
+    def get_queryset(self):
+        return Question.objects.order_by("-pub_date")[:5]
+
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = "polls/detail.html"
+
+
+
+class ResultView(generic.DetailView):
+    model = Question
+    template_name = "polls/results.html"
+```
+la función `vote` no se cambia por una clase porque es muy compleja.
+Las clase de las vistas genéraicas deben siempre cumplir con estas reglas en su nombre: Empezar en mayúscula porque son una clase y terminar en `View`, esto es una buena práctica
+
+Se le debe hacer saber al archivo `urls.py` que debe reconocer clases en vez de funciones:
+```py
+    # ex: /polls/
+    path("", views.IndexView.as_view(), name="index"),
+    # ex: /polls/5/
+    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    path("<int:pk>/results/", views.ResultView.as_view(), name="results"),
+```
+
 # Helpful tips
 
 ## Crear un entorno virtual
@@ -465,3 +508,4 @@ Puedes reiniciar la extensión si no te sale aún el autocompletado.
 
 - [Making queries | Django documentation](https://docs.djangoproject.com/en/3.2/topics/db/queries/#field-lookups-intro)
 
+- [Classy Class-Based Views. | Django](https://ccbv.co.uk/)
