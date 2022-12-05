@@ -303,6 +303,24 @@ def index(request):
 ```
 Cada vez que una url llame a la vista index, esta llamará al template `index.html` y le enviará el argumento `latest_question_list`
 
+Ahora, se crea un template para cada vez que se quiera ver el detalle de una pregunta en el archivo `templates/polls/detail.html`
+```html
+<h1>{{question.question_text}}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
+```
+De igual forma se tiene que configurar la llamada del template en las vistas:
+```py
+def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, "polls/detail.html",{
+        "question": question
+    } )
+```
+La funcion `get_object_or_404` es usada para devolver un error 404 si no se encuentra el objeto.
 
 
 
