@@ -6,7 +6,7 @@ En este primer curso de la saga de Django analizarás los conceptos iniciales pa
 - Aprender a estructurar un proyecto en este framework
 - Conocer a Django y ubicarlo en el ecosistema de Python
 
-Lo que verás a continuación son mis notas del curso 🚀
+Lo que verás a continuación son mis notas del [curso](https://platzi.com/cursos/django/) 🚀
 Si ves algún error o punto a mejorar no dudes en hacer tu aporte 💚
 
 ## Starting
